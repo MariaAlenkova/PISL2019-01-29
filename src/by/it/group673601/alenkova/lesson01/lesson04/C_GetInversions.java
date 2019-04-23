@@ -62,22 +62,18 @@ public class C_GetInversions {
         int left[] = Arrays.copyOfRange(arr, 0, m);
         int right[] = Arrays.copyOfRange(arr, m, arr.length);
 
-        return inversionCount(left) + inversionCount(right) + merge(arr, left, right);
+        return inversionCount(left) + inversionCount(right) + merge(left, right);
     }
-    private int merge(int[] arr, int[] left, int[] right) {
+    private int merge(int[] left, int[] right) {
         int i = 0, j = 0, count = 0;
         while (i < left.length || j < right.length) {
             if (i == left.length) {
-                arr[i+j] = right[j];
                 j++;
             } else if (j == right.length) {
-                arr[i+j] = left[i];
                 i++;
             } else if (left[i] <= right[j]) {
-                arr[i+j] = left[i];
                 i++;
             } else {
-                arr[i+j] = right[j];
                 count += left.length-i;
                 j++;
             }
